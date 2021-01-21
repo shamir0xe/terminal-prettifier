@@ -1,0 +1,58 @@
+#!/bin/bash
+signature="^"
+trim="false"
+command="ls"
+optneeded="false"
+while getopts s:toc: option
+do
+    case "${option}"
+    in
+        s) signature=${OPTARG};;
+        t) trim="true";;
+        o) optneeded="true";;
+        c) command=${OPTARG};;
+    esac
+done
+
+if [ $optneeded == "false" ]
+then
+    command=""
+    for var in "$@"
+    do
+        command="${command} ${var}"
+    done
+fi
+
+BLUE=`echo '\033[34m'`
+RED=`echo '\033[31m'`
+GREEN=`echo '\033[32m'`
+CYAN=`echo '\033[36m'`
+ORANGE=`echo '\033[33m'`
+MAGENTA=`echo '\033[35m'`
+END_COLOR=`echo '\033[0m'`
+
+printf "${BLUE}running: $RED%s$END_COLOR\n" "$command"
+printf "${BLUE}signature: $CYAN%s$END_COLOR\n" "$signature"
+
+# delimiters="(\ |\n|\[|\]|,|\^|[${RED}:]|$)"
+regex_string="s/$signature/"
+# error_highlight="s/(error|errors)/${RED}\1${END_COLOR}/g"
+# response_highlight="s/(passed|pass|response|responses|OK|ok|oK|Ok)/${GREEN}\1${END_COLOR}/g"
+# bracket_open_highlight="s/(\[|\]|\(|\)|\"|\`)/${CYAN}\1${END_COLOR}/g"
+# equivalent_highlight="s/(=|<|>|-|\+|%|\^|&|\||@|\*|~)/${ORANGE}&${END_COLOR}/g"
+# punctuation_highlight="s/(\.|,|:|;|!|\/|\\\|#)/${RED}\1${END_COLOR}/g"
+# uppercases="s/([A-Z]+)${delimiters}/${ORANGE}\1${END_COLOR}\2/g"
+spaces=`echo '\r                                                                                                      \r'/g`
+if  [ $trim == "true" ]
+then
+    printf "${BLUE}triming first$END_COLOR\n"
+else
+    printf "${BLUE}printing whole line$END_COLOR\n"
+    spaces=`echo '&'/g`
+fi
+printf "\n"
+py_exec="$( dirname "${BASH_SOURCE[0]}" )/main.py"
+eval $command 2>&1 | python3 $py_exec
+# |grep --line-buffered $signature
+#  | sed -E "$regex_string$spaces"
+# eval $command |grep --line-buffered $signature | sed -E "$regex_string$spaces;$bracket_open_highlight;$error_highlight;$response_highlight;$equivalent_highlight;$punctuation_highlight;$uppercases;"
