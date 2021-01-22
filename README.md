@@ -38,9 +38,8 @@ You can define special names painting with keyword **SN** in the config file. Al
     SN shamir0xe RB
 
 then the output should be like this:
-<pre><font color="#4E9A06">color</font> echo shamir0xe  
-<font color="#CC0000">s</font><font color="#3465A4">h</font><font color="#CC0000">a</font><font color="#3465A4">m</font><font color="#CC0000">i</font><font color="#3465A4">r</font><font color="#CC0000">0</font><font color="#3465A4">x</font><font color="#CC0000">e</font>
-</pre>
+
+<img src="readme/images/shamir0xeRGB.png" alt="RB" width="222"/>
 
 You can specify more colors to the text you want to highlight, by adding more letters to the color section.
 For example this could be use for painting every letter with every color we have:
@@ -48,9 +47,8 @@ For example this could be use for painting every letter with every color we have
     SN shamir0xe GBRCMYW
 
 then output should be something like this:
-<pre><font color="#4E9A06">color</font> echo shamir0xe
-<font color="#06989A">s</font><font color="#75507B">h</font><font color="#4E9A06">a</font><font color="#CC0000">m</font><font color="#D3D7CF">i</font><font color="#C4A000">r</font><font color="#3465A4">0</font><font color="#06989A">x</font><font color="#75507B">e</font>
-</pre>
+
+<img src="readme/images/shamir0xeRB.png" alt="GBRCMYW" width="222"/>
 
 As you see, the program shuffles the list of the colors for each config when it wants to print them. This is
 added for fun, and will be optional in the next releases.
