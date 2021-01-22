@@ -31,8 +31,8 @@ ORANGE=`echo '\033[33m'`
 MAGENTA=`echo '\033[35m'`
 END_COLOR=`echo '\033[0m'`
 
-printf "${BLUE}running: $RED%s$END_COLOR\n" "$command"
-printf "${BLUE}signature: $CYAN%s$END_COLOR\n" "$signature"
+# printf "${BLUE}running: $RED%s$END_COLOR\n" "$command"
+# printf "${BLUE}signature: $CYAN%s$END_COLOR\n" "$signature"
 
 # delimiters="(\ |\n|\[|\]|,|\^|[${RED}:]|$)"
 regex_string="s/$signature/"
@@ -43,14 +43,14 @@ regex_string="s/$signature/"
 # punctuation_highlight="s/(\.|,|:|;|!|\/|\\\|#)/${RED}\1${END_COLOR}/g"
 # uppercases="s/([A-Z]+)${delimiters}/${ORANGE}\1${END_COLOR}\2/g"
 spaces=`echo '\r                                                                                                      \r'/g`
-if  [ $trim == "true" ]
-then
-    printf "${BLUE}triming first$END_COLOR\n"
-else
-    printf "${BLUE}printing whole line$END_COLOR\n"
-    spaces=`echo '&'/g`
-fi
-printf "\n"
+# if  [ $trim == "true" ]
+# then
+#     printf "${BLUE}triming first$END_COLOR\n"
+# else
+#     printf "${BLUE}printing whole line$END_COLOR\n"
+#     spaces=`echo '&'/g`
+# fi
+# printf "\n"
 py_exec="$( dirname "${BASH_SOURCE[0]}" )/main.py"
 eval $command 2>&1 | python3 $py_exec
 # |grep --line-buffered $signature
