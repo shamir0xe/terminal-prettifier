@@ -1,5 +1,6 @@
 import enum
 import os.path
+import os
 from ..libs.PythonLibrary.buffer_io import FileReader
 from ..libs.PythonLibrary.files import File
 from ..libs.PythonLibrary.enums import Errors
@@ -16,8 +17,8 @@ class PrettifierConfig:
 
     def __init__(self, file_name=None):
         if file_name is None:
-            cur_path = os.path.abspath(os.path.dirname(__file__))
-            file_name = os.path.join(cur_path, "../.prettifier_cfg")
+            file_name = os.path.join(os.path.dirname(os.path.realpath('__file__')), '.prettifier_cfg')
+        # print('file: {}'.format(file_name))
         if not File.is_file(file_name):
             raise Exception(Errors.FileNotFound)
         self.f = FileReader(file_name)
