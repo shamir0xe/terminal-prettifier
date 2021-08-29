@@ -1,3 +1,4 @@
+from __future__ import annotations
 import enum
 import os.path
 import os
@@ -9,24 +10,38 @@ from .colors import Colors
 from .string_types import StringTypes
 
 
-
+MAX_DEPTH = 3
 class PrettifierConfig:
     class ConfigTypes(enum.Enum):
         SwitcherConfig = 'SC'
         SpecialName = 'SN'
 
-    def __init__(self, file_name=None):
-        if file_name is None:
-            file_name = os.path.join(os.path.dirname(os.path.realpath('__file__')), '.prettifier_cfg')
-        # print('file: {}'.format(file_name))
-        if not File.is_file(file_name):
-            raise Exception(Errors.FileNotFound)
-        self.f = FileReader(file_name)
+    def __init__(self):
+        self \
+            .__initialize() \
+            .__read_file() \
+            .__retrieve_config()
+
+    def __initialize(self) -> PrettifierConfig:
         self.__switcher = {}
         self.__special_names = {}
-        self.__retrieve_config()
+        self.f = None
+        return self
 
-    def __retrieve_config(self):
+    def __read_file(self) -> PrettifierConfig:
+        base_dir = os.path.dirname(os.path.realpath('__file__'))
+        file_name = ''
+        depth = 0
+        while not File.is_file(file_name) and depth < MAX_DEPTH:
+            file_name = os.path.join(base_dir, '.prettifier_cfg')
+            base_dir = os.path.join(base_dir, '..')
+            depth += 1
+        if depth >= MAX_DEPTH:
+            raise Exception(Errors.FileNotFound)
+        self.f = FileReader(file_name)
+        return self
+
+    def __retrieve_config(self) -> None:
         color_values = set(color for color in Colors)
         while not self.f.end_of_buffer():
             f = self.f
@@ -45,3 +60,4 @@ class PrettifierConfig:
             PrettifierConfig.ConfigTypes.SpecialName: self.__special_names
         }
         return sw.get(config_type, 'bad input')
+
