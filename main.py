@@ -15,6 +15,7 @@ from TerminalPrettifier.src.prettifier_stream import *
 #     def __init__(self, filename=".prettifier_log"):
 #         self.filename = filename
 
+
 #     def add_log(self, string):
 #         append_to_file(self.filename, string + '\n')
 
