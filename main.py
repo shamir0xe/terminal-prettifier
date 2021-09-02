@@ -3,13 +3,13 @@ import enum
 import sys
 import os
 
-SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
-sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, '..')))
+# SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
+# sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, '..')))
 
-from TerminalPrettifier.libs.PythonLibrary.buffer_io import (StandardInputReader)
-from TerminalPrettifier.libs.PythonLibrary.utils import (debug_text)
-from TerminalPrettifier.src.prettifier_config import *
-from TerminalPrettifier.src.prettifier_stream import *
+from libs.PythonLibrary.buffer_io import (StandardInputReader)
+from libs.PythonLibrary.utils import (debug_text)
+from src.prettifier_config import PrettifierConfig
+from src.prettifier_stream import PrettifierStream
 
 # class Log:
 #     def __init__(self, filename=".prettifier_log"):

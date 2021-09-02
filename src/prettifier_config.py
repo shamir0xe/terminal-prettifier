@@ -2,12 +2,12 @@ from __future__ import annotations
 import enum
 import os.path
 import os
-from ..libs.PythonLibrary.buffer_io import FileReader
-from ..libs.PythonLibrary.files import File
-from ..libs.PythonLibrary.enums import Errors
-from ..libs.PythonLibrary.utils import debug_text
-from .colors import Colors
-from .string_types import StringTypes
+from libs.PythonLibrary.buffer_io import FileReader
+from libs.PythonLibrary.files import File
+from libs.PythonLibrary.enums import Errors
+from libs.PythonLibrary.utils import debug_text
+from src.colors import Colors
+from src.string_types import StringTypes
 
 
 MAX_DEPTH = 3
@@ -29,7 +29,7 @@ class PrettifierConfig:
         return self
 
     def __read_file(self) -> PrettifierConfig:
-        base_dir = os.path.dirname(os.path.realpath('__file__'))
+        base_dir = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
         file_name = ''
         depth = 0
         while not File.is_file(file_name) and depth < MAX_DEPTH:
