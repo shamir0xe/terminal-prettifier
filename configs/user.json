@@ -1,0 +1,10 @@
+{
+    "switcher": {
+        "digit": "RED",
+        "alphabet": "GREEN",
+        "dot": "BLUE",
+        "separator": "MAGENTA",
+        "parentheses": "CYAN",
+        "operator": "YELLOW"
+    }
+}
