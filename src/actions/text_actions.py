@@ -4,7 +4,7 @@ from src.types.colors import Colors
 from src.types.logic_pack import LogicPack
 from src.types.characters import Characters
 from src.actions.check_logic import check_logic
-from src.actions.color_mapper import color_mapper
+from src.actions.color_mapper import color_mapper, string_color_mapper
 
 
 EDITS_ARR = ["\033[F", "\033[A"]
@@ -19,6 +19,9 @@ class TextActions:
         self.operators = Config.read("basics.operators")
         self.edits = EDITS_ARR
         self.switcher = Config.read("user.switcher")
+        self.specific_names = sorted(
+            Config.read("user.specific_names"), key=lambda x: -len(x[0])
+        )
 
     def check_escape(self, reader: BufferReader) -> bool:
         # check whether a char is an escape
@@ -73,7 +76,7 @@ class TextActions:
             last += 1
         while first >= 0 and self.get_character_type(word[first]) is char_type:
             first -= 1
-        return first, last
+        return first + 1, last - 1
 
     def range_type(self, word: str, idx: int) -> Characters:
         char_type = self.get_character_type(word[idx])
@@ -82,8 +85,8 @@ class TextActions:
             if not check_logic(
                 word,
                 lambda char: self.get_character_type(char),
-                LogicPack(first_idx, Characters.ALPHABET, False),
-                LogicPack(last_idx, Characters.ALPHABET, False),
+                LogicPack(first_idx - 1, Characters.ALPHABET, False),
+                LogicPack(last_idx + 1, Characters.ALPHABET, False),
             ):
                 char_type = Characters.ALPHABET
         return char_type
@@ -91,9 +94,27 @@ class TextActions:
     def character_switcher(self, char_type: Characters) -> Colors:
         return color_mapper(self.switcher[char_type.value])
 
+    def specific_names_switcher(self, word: str, colors: list) -> list:
+        word = word.lower()
+        idx = 0
+        while idx < len(word):
+            for name, value in self.specific_names:
+                left, right = idx, idx + len(name) - 1
+                # {specific names} are sorted from big to small
+                if word[left : right + 1] == name:
+                    colors[left : right + 1] = string_color_mapper(
+                        value, right - left + 1
+                    )
+                    idx = right
+                    break
+            idx += 1
+        return colors
+
     def color_string(self, word: str) -> list:
         colors = list(map(lambda _: Colors.RESET, word))
         # changing base character colors
         for idx, _ in enumerate(word):
             colors[idx] = self.character_switcher(self.range_type(word, idx))
+        # changing colors based on specific names
+        colors = self.specific_names_switcher(word, colors)
         return colors

@@ -5,6 +5,23 @@
         "dot": "BLUE",
         "separator": "MAGENTA",
         "parentheses": "CYAN",
-        "operator": "YELLOW"
-    }
+        "operator": "YELLOW",
+        "escape": "BLACK"
+    },
+    "specific_names": [
+        ["ok", "GREEN"],
+        ["pass", "G"],
+        ["passed", "G"],
+        ["error", "R"],
+        ["err", "R"],
+        ["fail", "R"],
+        ["timeout", "RED"],
+        ["failed", "RED"],
+        ["notice", "YELLOW"],
+        ["warn", "YELLOW"],
+        ["warning", "YELLOW"],
+        ["ms", "YELLOW"],
+        ["shamir0xe", "RYC"],
+        ["0xe", "YRC"]
+    ]
 }
