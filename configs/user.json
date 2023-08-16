@@ -1,8 +1,8 @@
 {
     "switcher": {
-        "digit": "RED",
+        "digit": "BLUE",
         "alphabet": "GREEN",
-        "dot": "BLUE",
+        "dot": "RED",
         "separator": "MAGENTA",
         "parentheses": "CYAN",
         "operator": "YELLOW",
