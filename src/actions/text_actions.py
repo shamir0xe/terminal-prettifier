@@ -71,6 +71,7 @@ class TextActions:
         return Characters.ESCAPE
 
     def __index_bounderies(self, word: str, idx: int, char_type: Characters) -> tuple:
+        # find the (l, r) boundery with the {char_type} type, explanding from {idx}
         first, last = idx, idx
         while last < len(word) and self.get_character_type(word[last]) is char_type:
             last += 1
