@@ -1,29 +1,40 @@
+<h1 align="center" style="display: block; font-size: 2.5em; font-weight: bold; margin-block-start: 1em; margin-block-end: 1em;">
+<a name="logo" href="#"><img align="center" src="assets/logos/tp.png" alt="pylib" style="width:100%;height:100%"/></a>
+</h1>
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+![Python](https://img.shields.io/badge/Python-3.6%2B-blue)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
+A tool to make your terminal more prettier!
+
+
 # Terminal Prettifier
-This is terminal output highliter with customizable config. If you ever wanted to have a prettier ping
-command or prettier interactive shells output, it's a script for you! just add `color` to the begining of
-the command you want to execute, and bam! It's so PRETTIER now.
+This is a terminal output highlighter with a customizable config. If you ever wanted to have a prettier ping command or prettier interactive shells output, it's a script for you! just add `color` to the beginning of the command you want to execute, and bam! It's so PRETTIER now.
+
 
 ### Example Ping
-<img src="readme/images/ping.png" alt="ping" width="555"/>
+<p align="center"><img src="assets/logos/ping.png" alt="ping" width="min(90%, 666px)"/></p>
 
 ### Example Python
-<img src="readme/images/python.png" alt="python" width="600"/>
+<p align="center"><img src="assets/logos/python.png" alt="python" width="min(90%, 666px)"/></p>
 
 ## Installation
-Clone this library and add the `color` bash file as an alias to your environment variables.
+Clone this library and add the `color` alias to your `~/.bash_aliases` as an environment variable.
 ```bash
-alias color=`bash /PATH-TO-THIS-LIBRARY/TerminalPrettifier/color`
+alias color='bash /PATH-TO-THIS-LIBRARY/terminal-prettifier/color'
 ```
-Then open new terminal and use color before command you want to use.
-You need to have `python3` in your path. compatibility tested for `python >= 3.6`. You can also change the
-python name at the bottom of the page in `color` bash file by yourself:
+
+Then open a new terminal and use `color` before the command you want to use.
+You need to have `python3` in your path. You can also change the python name at the bottom of the page in the `color` bash file by yourself:
 ```bash
-eval $command 2>&1 | python3 $py_exe
+python3 $py_exe
 ```
+
+
 ## Configuration
-You can edit the configuration file and customize it. The config file is placed in the root directory
-of the TerminalPrettifier folder named `.prettifier_cfg`. You can change the colors of each section and 
-and set it to one of color names provided in `src/colors.py`. Colors list are as follow:
+You can edit the configuration file and customize it. The config file is placed in the `configs` directory of the `terminal-prettifier` folder named `user.json`. You can change the colors of each section and set it to one of the color names provided in `src/types/colors.py`. The colors list are as follow:
 * Green
 * Blue
 * Red
@@ -33,22 +44,21 @@ and set it to one of color names provided in `src/colors.py`. Colors list are as
 * Black
 * White
 
-You can define special names painting with keyword **SN** in the config file. Also you can choose how you want to paint the word with a sequence of first letter of colors in uppercase foramt. For example if you want to change *shamir0xe* into red and blue, you can add something like this to the config:
+You can define special colors for individual names you provided in `specific_names` section of `user.json` file. Also you can choose how you want to paint the word with a sequence of first letter of colors in a single string. For example if you want to change *shamir0xe* into red and blue, you can add something like this to the config:
 
-    SN shamir0xe RB
+```json
+user.json
+{
+    ...,
+    "specific_names": {
+        ...,
+        ["shamir0xe", "RYC"]
+    }
+}
+```
 
-then the output should be like this:
+output:
 
-<img src="readme/images/shamir0xeRGB.png" alt="RB" width="222"/>
+<p align="center"><img src="assets/logos/0xeRYC.png" alt="shamir0xeRYC" width="222"/></p>
 
-You can specify more colors to the text you want to highlight, by adding more letters to the color section.
-For example this could be use for painting every letter with every color we have:
-
-    SN shamir0xe GBRCMYW
-
-then output should be something like this:
-
-<img src="readme/images/shamir0xeRB.png" alt="GBRCMYW" width="222"/>
-
-As you see, the program shuffles the list of the colors for each config when it wants to print them. This is
-added for fun, and will be optional in the next releases.
+You can specify more colors to the text you want to highlight, by adding more letters to it's section.
