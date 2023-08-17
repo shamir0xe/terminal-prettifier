@@ -15,10 +15,10 @@ This is a terminal output highlighter with a customizable config. If you ever wa
 
 
 ### Example Ping
-<p align="center"><img src="assets/logos/ping.png" alt="ping" width="min(90%, 666px)"/></p>
+<p align="center"><img src="assets/logos/ping.png" alt="ping"/></p>
 
 ### Example Python
-<p align="center"><img src="assets/logos/python.png" alt="python" width="min(90%, 666px)"/></p>
+<p align="center"><img src="assets/logos/python.png" alt="python"/></p>
 
 ## Installation
 Clone this library and add the `color` alias to your `~/.bash_aliases` as an environment variable.
@@ -46,7 +46,7 @@ You can edit the configuration file and customize it. The config file is placed 
 
 You can define special colors for individual names you provided in `specific_names` section of `user.json` file. Also you can choose how you want to paint the word with a sequence of first letter of colors in a single string. For example if you want to change *shamir0xe* into red and blue, you can add something like this to the config:
 
-```json
+```
 user.json
 {
     ...,
