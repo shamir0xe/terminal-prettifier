@@ -9,6 +9,12 @@
 
 A tool to make your terminal more prettier!
 
+### Table of Contents
+- [Terminal Prettifier](#terminal-prettifier)
+    - [Example Ping](#example-ping)
+    - [Example Python](#example-python)
+- [Installation](#installation)
+- [Configuration](#configuration)
 
 # Terminal Prettifier
 This is a terminal output highlighter with a customizable config. If you ever wanted to have a prettier ping command or prettier interactive shells output, it's a script for you! just add `color` to the beginning of the command you want to execute, and bam! It's so PRETTIER now.
@@ -20,7 +26,7 @@ This is a terminal output highlighter with a customizable config. If you ever wa
 ### Example Python
 <p align="center"><img src="assets/logos/python.png" alt="python"/></p>
 
-## Installation
+# Installation
 Clone this library and add the `color` alias to your `~/.bash_aliases` as an environment variable.
 ```bash
 alias color='bash /PATH-TO-THIS-LIBRARY/terminal-prettifier/color'
@@ -33,7 +39,7 @@ python3 $py_exe
 ```
 
 
-## Configuration
+# Configuration
 You can edit the configuration file and customize it. The config file is placed in the `configs` directory of the `terminal-prettifier` folder named `user.json`. You can change the colors of each section and set it to one of the color names provided in `src/types/colors.py`. The colors list are as follow:
 * Green
 * Blue
